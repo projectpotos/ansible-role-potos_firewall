@@ -5,10 +5,9 @@
   gather_facts: no
 
   tasks:
-  - name: check if template has been applied
-    ansible.builtin.stat:
-      path: "/potos.example"
+  - name: check if ufw rule has been configured
+    ansible.builtin.command: ufw status
     register: out
     changed_when: false
     failed_when:
-      - not out.stat.exists
+      - out not search("124/tcp                    ALLOW       123.123.123.123            # allow access to port 124")

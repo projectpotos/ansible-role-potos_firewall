@@ -1,0 +1,46 @@
+---
+- name: Disable ufw
+  community.general.ufw:
+    state: disabled
+  when: potos_firewall_disable_ufw
+
+- block:
+    - name: Ensure package is in correct state
+      ansible.builtin.apt:
+        name: ufw
+        state: "{{ potos_firewall_package_state }}"
+    - name: Enable ufw
+      community.general.ufw:
+        state: enabled
+    - name: Set incoming default policiy for ufw
+      community.general.ufw:
+        policy: "{{ potos_firewall_incoming_default_policy }}"
+        direction: incoming
+      notify: potos_firewall_ufw_changed
+    - name: Set outgoing default policiy for ufw
+      community.general.ufw:
+        policy: "{{ potos_firewall_outgoing_default_policy }}"
+        direction: outgoing
+      notify: potos_firewall_ufw_changed
+    - name: Configure ufw rules
+      community.general.ufw:
+        rule: "{{ item.rule }}"
+        interface: "{{ item.interface | default('') }}"
+        direction: "{{ item.direction | default('in') }}"
+        from_ip: "{{ item.from_ip | default('any') }}"
+        to_ip: "{{ item.to_ip | default('any') }}"
+        from_port: "{{ item.from_port | default('') }}"
+        to_port: "{{ item.to_port | default('') }}"
+        protocol: "{{ item.protocol | default('any') }}"
+        route: "{{ item.route | default(omit) }}"
+        log: "{{ item.log | default(false) }}"
+        comment: "{{ item.comment | default(omit) }}"
+        delete: "{{ item.delete | default(omit) }}"
+      with_items: "{{ potos_firewall_rules }}"
+      notify: potos_firewall_ufw_changed
+    - name: Configure ufw logging
+      community.general.ufw:
+        logging: "{{ potos_firewall_loglevel }}"
+      notify: potos_firewall_ufw_changed
+
+  when: not potos_firewall_disable_ufw
