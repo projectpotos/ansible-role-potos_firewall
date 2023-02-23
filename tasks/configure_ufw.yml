@@ -6,7 +6,7 @@
 
 - name: Configure ufw
   when: not potos_firewall_disable_ufw
-- block:
+  block:
     - name: Ensure package is in correct state
       ansible.builtin.apt:
         name: ufw
