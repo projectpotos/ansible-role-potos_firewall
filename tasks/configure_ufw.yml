@@ -4,6 +4,8 @@
     state: disabled
   when: potos_firewall_disable_ufw
 
+- name: Configure ufw
+  when: not potos_firewall_disable_ufw
 - block:
     - name: Ensure package is in correct state
       ansible.builtin.apt:
@@ -42,5 +44,3 @@
       community.general.ufw:
         logging: "{{ potos_firewall_loglevel }}"
       notify: potos_firewall_ufw_changed
-
-  when: not potos_firewall_disable_ufw

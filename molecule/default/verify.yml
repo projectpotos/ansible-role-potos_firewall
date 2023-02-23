@@ -5,9 +5,9 @@
   gather_facts: no
 
   tasks:
-  - name: check if ufw rule has been configured
-    ansible.builtin.command: ufw status
-    register: out
-    changed_when: false
-    failed_when:
-      - out not search("124/tcp                    ALLOW       123.123.123.123            # allow access to port 124")
+    - name: check if ufw rule has been configured
+      ansible.builtin.command: ufw status
+      register: out
+      changed_when: false
+      failed_when:
+        - out not search("124/tcp                    ALLOW       123.123.123.123            # allow access to port 124")
