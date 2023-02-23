@@ -10,4 +10,4 @@
       register: out
       changed_when: false
       failed_when:
-        - out not search("124/tcp                    ALLOW       123.123.123.123            # allow access to port 124")
+        - out not search("124/tcp                    ALLOW       123.123.123.123            {{ '#' }} allow access to port 124")
