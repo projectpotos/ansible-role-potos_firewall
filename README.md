@@ -119,8 +119,9 @@ potos_firewall_rules:
 
 
 ## Requirements
-
-community.general.ufw
+```
+ansible-galaxy collection install community.general
+```
 
 ## License
 
@@ -129,4 +130,3 @@ See [LICENSE](./LICENSE)
 ## Author Information
 
 [Project Potos](https://github.com/projectpotos)
-
