@@ -9,4 +9,4 @@
       ansible.builtin.command: ufw status verbose
       register: out
       changed_when: false
-      failed_when: out is search("124/tcp                    ALLOW IN    123.123.123.123")
+      failed_when: out is not search("124/tcp                    ALLOW IN    123.123.123.123")
