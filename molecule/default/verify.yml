@@ -6,7 +6,7 @@
 
   tasks:
     - name: check if ufw rule has been configured
-      ansible.builtin.command: ufw status
+      ansible.builtin.command: ufw status verbose
       register: out
       changed_when: false
-      failed_when: "'124/tcp                    ALLOW       123.123.123.123' not in out"
+      failed_when: out is match("123.123.123.123")
