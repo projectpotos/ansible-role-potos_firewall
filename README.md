@@ -1,13 +1,13 @@
 
 # Ansible Role - potos\_firewall 
 
-Role to configure firewll rules of Potos Linux Clients.
+Role to configure firewall rules of Potos Linux Clients.
 
 [![Test](https://github.com/projectpotos/ansible-role-potos_firewall/actions/workflows/test.yml/badge.svg)](https://github.com/projectpotos/ansible-role-potos_firewall/actions/workflows/test.yml)
 
 ## Example Playbook
 
-As this role is tested via Molecule one can use [that
+As this role is tested via Molecule, one can use [that
 playbook](./molecule/default/converge.yml) as a starting point:
 
 ```yaml
@@ -107,7 +107,7 @@ To                         Action      From
 
 8.8.8.8 53                 ALLOW OUT   Anywhere 
 ```
-If a rule shoudl be changed, `delete: true` has to be added, to first delte the rule. After that `delete: true` can be removed and the rule changed. It will then be added to the ufw configuration as a new rule.
+If a rule should be changed or removed, `delete: true` has to be added, to delete the rule. After that, `delete: true` can be removed and the rule changed or removed entirely. If changed, it will then be added to the ufw configuration as a new rule.
 ```yaml
 potos_firewall_rules:
   - rule: allow
