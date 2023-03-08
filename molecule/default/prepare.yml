@@ -8,7 +8,7 @@
     # Update the apt cache as it's potentialy outdated in the container
     - name: update apt
       ansible.builtin.shell:  # noqa: command-instead-of-module
-        cmd: 'apt-get update && apt-get upgrade -y'
+        cmd: 'apt-get update && apt-get upgrade -y && apt install iptables && mv -v /usr/sbin/ip6tables /usr/sbin/ip6tables--DISABLED-$(date +"%Y-%m-%d--%H-%M") && cp -v /usr/sbin/ip6tables-nft /usr/sbin/ip6tables'
       when: ansible_distribution == 'Ubuntu'
       register: out
       changed_when: "'0 upgraded' not in out.stdout"
