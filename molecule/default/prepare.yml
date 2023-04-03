@@ -12,3 +12,8 @@
       when: ansible_distribution == 'Ubuntu'
       register: out
       changed_when: "'0 upgraded' not in out.stdout"
+
+    - name: enable ip6tables
+      ansible.builtin.shell:  # noqa: command-instead-of-shell
+        cmd: 'update-alternatives --set ip6tables /usr/sbin/ip6tables-nft'
+      changed_when: false
