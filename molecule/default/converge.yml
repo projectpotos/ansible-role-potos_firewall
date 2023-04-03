@@ -3,7 +3,15 @@
 - name: Converge
   hosts: all
   gather_facts: yes
+  vars:
+    potos_firewall_package_state: 'latest'
+    potos_firewall_rules:
+      - rule: allow
+        from_ip: 123.123.123.123
+        to_port: 124
+        protocol: tcp
+        comment: "allow access to port 124"
   tasks:
     - name: run role
       ansible.builtin.include_role:
-        name: 'ansible-role-potos_template'
+        name: 'ansible-role-potos_firewall'

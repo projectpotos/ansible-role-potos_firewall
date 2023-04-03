@@ -1,9 +1,6 @@
 ---
 
-- name: Example task to deploy a template
-  ansible.builtin.template:
-    src: 'potos.example.j2'
-    dest: '/potos.example'
-    owner: root
-    group: root
-    mode: '0755'
+- name: Configure ufw for Debian flavored systems
+  ansible.builtin.include_tasks: configure_ufw.yml
+  when: ( ansible_facts['os_family'] == "Debian" and potos_firewall_force_type | string == 'none') or
+        ( potos_firewall_force_type | string == "ufw")
