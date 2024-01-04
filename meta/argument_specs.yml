@@ -2,17 +2,47 @@
 
 argument_specs:
   main:
-    short_description: Role to use as template for new roles of Potos Linux Clients.
+    short_description: Role to configure the firewall of Potos Linux Clients.
     options:
-      potos_template_example_var:
+      potos_firewall_force_type:
         description:
-          - Example variable
+          - to define if ufw or firewalld should be used
         type: str
         required: no
-        default: 'hello world!'
-      potos_template_example_list:
+        default: ''
+      potos_firewall_disable_ufw:
         description:
-          - List of items used for action xyz
+          - to disable ufw
+        type: str
+        required: no
+        default: ''
+      potos_firewall_incoming_default_policy:
+        description:
+          - to define default Firewall policies
+        type: str
+        required: no
+        default: ''
+      potos_firewall_outgoing_default_policy:
+        description:
+          - to define default Firewall policies
+        type: str
+        required: no
+        default: ''
+      potos_firewall_loglevel:
+        description:
+          - to define loglevel
+        type: str
+        required: no
+        default: ''
+      potos_firewall_package_state:
+        description:
+          - to define to define state of the firewall package
+        type: str
+        required: no
+        default: ''
+      potos_firewall_rules:
+        description:
+          - to define firewall rules as a list
         type: list
         elements: str
         required: no

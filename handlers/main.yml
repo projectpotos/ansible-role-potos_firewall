@@ -1,0 +1,4 @@
+---
+- name: potos_firewall_ufw_changed
+  community.general.ufw:
+    state: reloaded

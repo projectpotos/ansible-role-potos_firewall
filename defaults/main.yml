@@ -1,7 +1,14 @@
 ---
 
-# Example variable
-potos_template_example_var: 'hello world!'
+potos_firewall_incoming_default_policy: 'reject'
+potos_firewall_outgoing_default_policy: 'allow'
 
-# List of items used for action xyz
-potos_template_example_list: []
+potos_firewall_force_type: 'none'
+
+potos_firewall_disable_ufw: false
+
+potos_firewall_rules: []
+
+potos_firewall_loglevel: 'on'
+
+potos_firewall_package_state: 'present'
